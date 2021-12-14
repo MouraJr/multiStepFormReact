@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import TextField from '@material-ui/core/TextField';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
 
 export class FormUserDetails extends Component {
     continue = e => {
@@ -14,11 +16,11 @@ export class FormUserDetails extends Component {
     }
 
     render() {
-        const { values } = this.props;
+        const { values, handleChange } = this.props;
 
         return (
-            <>
-                <AppBar position="static">
+            <ThemeProvider >
+                <AppBar position="static" color="secondary">
                     <Toolbar>
                         <IconButton edge="start" className="" color="inherit" aria-label="menu">
                             <MenuIcon />
@@ -26,10 +28,33 @@ export class FormUserDetails extends Component {
                         <Typography variant="h6" className="">
                             Enter User Details
                         </Typography>
-                        <Button color="inherit">Login</Button>
                     </Toolbar>
                 </AppBar>
-            </>
+                <Container>
+                    <TextField
+                        placeholder="First Name"
+                        onChange={handleChange('firstName')}
+                        defaultValue={values.firstName}
+                        margin="dense"
+                    />
+                    <br />
+                    <TextField
+                        placeholder="Last Name"
+                        onChange={handleChange('lastName')}
+                        defaultValue={values.firstName}
+                        margin="dense"
+                    />
+                    <br />
+                    <TextField
+                        placeholder="Email"
+                        onChange={handleChange('email')}
+                        defaultValue={values.email}
+                        margin="dense"
+                    />
+                    <br />
+                    <Button variant="contained" color="secondary" onClick={this.continue}>Continue</Button>
+                </Container>
+            </ThemeProvider>
         )
     }
 }
